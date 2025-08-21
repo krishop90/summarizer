@@ -60,7 +60,7 @@ function PointsCard({ points, type }) {
     <div className="result-card">
       <h2 style={{ color: "black" }}>Important Points</h2>
       {type && (
-        <div className="type-label ">
+        <div className="type-label" style={{ color: "black" }}>
           <span>Type: </span>
           <span className={`type-badge type-${type}`}>{type}</span>
         </div>
@@ -106,7 +106,6 @@ function App() {
     formData.append("file", videoFile);
 
     try {
-      // 1. Upload video and extract audio
       const extractRes = await axios.post(
         "/api/extract-audio",
         formData,
@@ -115,14 +114,12 @@ function App() {
       const audioPath = extractRes.data.audioFile;
       setStatus("Audio extracted. Transcribing and summarizing...");
 
-      // 2. Transcribe audio and summarize
       const transcribeRes = await axios.post("/api/transcribe", { audioPath });
       setStatus("Done!");
 
       let summary = transcribeRes.data.summary;
       let transcriptText = transcribeRes.data.transcriptionText;
 
-      // Try to extract type and points from summary
       let extractedPoints = [];
       let extractedType = "";
       if (summary && typeof summary === "object") {
