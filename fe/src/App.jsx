@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import "./App.css";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 function UploadCard({ onFileChange, onUpload, uploading, videoFile }) {
   const fileInputRef = useRef();
@@ -107,14 +108,14 @@ function App() {
 
     try {
       const extractRes = await axios.post(
-        "/api/extract-audio",
+        `${API_BASE}/extract-audio`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       const audioPath = extractRes.data.audioFile;
       setStatus("Audio extracted. Transcribing and summarizing...");
 
-      const transcribeRes = await axios.post("/api/transcribe", { audioPath });
+      const transcribeRes = await axios.post(`${API_BASE}/transcribe`, { audioPath });
       setStatus("Done!");
 
       let summary = transcribeRes.data.summary;
