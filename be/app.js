@@ -1,17 +1,19 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const audioExtractionRoutes = require('./routes/audioExtractRoute');
-const audioTranscriptRoutes = require('./routes/audioTranscriptRoute');
 
 require('dotenv').config();
 
-app.use(cors());
+app.use(express.json());
+
 app.use(cors({
-  origin: "https://summarizer-1-diph.onrender.com"
+  origin: "https://summarizer-1-diph.onrender.com",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-app.use(express.json());
+const audioExtractionRoutes = require('./routes/audioExtractRoute');
+const audioTranscriptRoutes = require('./routes/audioTranscriptRoute');
 
 app.use('/api', audioExtractionRoutes);
 app.use('/api', audioTranscriptRoutes);
