@@ -1,3 +1,10 @@
+Live link : https://summarizer-1-diph.onrender.com/    (after uploading video if you see DONE! as message means AI is hitting the rate limit as it is free tier AI integration)
+
+
+
+
+
+
 🎬 Video Summarizer – Smart Transcription & Summarization
 This project allows users to upload a video file, automatically extract audio, transcribe it using AssemblyAI, and then generate a structured summary using Groq AI models.
 It supports multi-stage summarization to handle long transcripts efficiently.
