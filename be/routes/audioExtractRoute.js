@@ -1,10 +1,16 @@
 const express = require('express');
 const ffmpeg = require('fluent-ffmpeg');
+const ffmpegPath = require('ffmpeg-static');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
 const router = express.Router();
+ffmpeg.setFfmpegPath(ffmpegPath);
+
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -27,7 +33,7 @@ router.post('/extract-audio', upload.single('file'), (req, res) => {
     .audioCodec('pcm_s16le')
     .save(audioPath)
     .on('end', () => {
-      fs.unlinkSync(videoPath); 
+      fs.unlinkSync(videoPath);
       res.json({ message: 'Audio extracted successfully', audioFile: audioPath });
     })
     .on('error', (err) => {
