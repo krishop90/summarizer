@@ -1,3 +1,4 @@
+import cors from "cors";
 const express = require('express');
 const app = express();
 const audioExtractionRoutes = require('./routes/audioExtractRoutes');
@@ -5,6 +6,10 @@ const audioTranscriptRoutes = require('./routes/audioTranscriptRoute');
 
 require('dotenv').config();
 
+app.use(cors());
+app.use(cors({
+  origin: "https://summarizer-1-diph.onrender.com"
+}));
 
 app.use(express.json());
 
