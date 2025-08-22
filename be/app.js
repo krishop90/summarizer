@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-const audioExtractionRoutes = require('./routes/audioExtractRoutes');
+const audioExtractionRoutes = require('./routes/audioExtractRoute');
 const audioTranscriptRoutes = require('./routes/audioTranscriptRoute');
 
 require('dotenv').config();

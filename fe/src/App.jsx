@@ -108,14 +108,14 @@ function App() {
 
     try {
       const extractRes = await axios.post(
-        `${API_BASE}/extract-audio`,
+        `${API_BASE}/api/extract-audio`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       const audioPath = extractRes.data.audioFile;
       setStatus("Audio extracted. Transcribing and summarizing...");
 
-      const transcribeRes = await axios.post(`${API_BASE}/transcribe`, { audioPath });
+      const transcribeRes = await axios.post(`${API_BASE}/api/transcribe`, { audioPath });
       setStatus("Done!");
 
       let summary = transcribeRes.data.summary;
