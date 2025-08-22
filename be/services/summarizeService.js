@@ -49,7 +49,6 @@ async function callGroq(prompt, apiKey) {
 async function analyzeTranscript(transcript) {
   const chunks = splitTranscript(transcript, 4000);
 
-  // 🔹 Stage 1: Summarize each chunk
   const chunkSummaries = [];
   for (const chunk of chunks) {
     const chunkPrompt = `
@@ -60,11 +59,9 @@ ${chunk}
     const summary = await callGroq(chunkPrompt, process.env.GROQ_API_KEY);
     chunkSummaries.push(summary);
 
-    // prevent hitting rate limits
     await new Promise((res) => setTimeout(res, 4000));
   }
 
-  // 🔹 Stage 2: Global structured analysis
   const finalPrompt = `
 Given the following chunk summaries of a transcript, determine if the conversation is an interview or a casual meeting.
 - If it is an interview, extract only the questions asked.
