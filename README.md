@@ -15,5 +15,5 @@ It supports multi-stage summarization to handle long transcripts efficiently.
 Backend: Node.js (Express.js)
 Video → Audio: ffmpeg
 Transcription: AssemblyAI API
-Summarization: Groq API (LLaMA-3.1 models)
+Summarization: Groq API (models)
 Utilities: Axios, dotenv, fs
